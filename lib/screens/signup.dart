@@ -12,20 +12,25 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up'),),
-       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            MyStyle().showLogo(),
-            MyStyle().showTitle('app Food'),    
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: ListView (padding: EdgeInsets.all(30.0),
+        children: <Widget> [
+          myLogo(),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MyStyle().showTitle('App Food'),
+            ],
+          ),
           ],
         ),
-
-      ),
     );
   }
 
-  
-  
+  Widget myLogo() => Row(mainAxisAlignment: MainAxisAlignment.center ,
+    children: <Widget>[
+      MyStyle().showLogo(),
+    ],
+  );
 }
