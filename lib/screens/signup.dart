@@ -1,4 +1,5 @@
 import 'package:appfood/utility/my_style.dart';
+import 'package:appfood/utility/normal_dialog.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -10,6 +11,10 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   String chooseType = '';
+  String name ='';
+  String user ='';
+  String password='';
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +47,19 @@ class _SignUpState extends State<SignUp> {
 
   Widget registerButton() => Container(width: 250.0,
     child: ElevatedButton(
-      onPressed: () {}, 
-      child: Text('Register',),
+      onPressed: () {
+        print('Name = $name,User = $user,Password = $password , chooseType = $chooseType ');
+        if (name.isEmpty ||
+         user.isEmpty || 
+         password.isEmpty) 
+         {
+          print('error');
+          normalDialog(context, 'ข้อมูลไม่ครบถ้วน');
+        }
+
+      }, 
+
+      child: const Text('Register',),
     ),
   );
 
@@ -126,6 +142,7 @@ class _SignUpState extends State<SignUp> {
           Container(
             width: 250.0,
             child: TextField(
+              onChanged: (value) => name = value.trim(),
                 decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.face,
@@ -148,6 +165,7 @@ class _SignUpState extends State<SignUp> {
           Container(
             width: 250.0,
             child: TextField(
+              onChanged: (value) => user = value.trim(),
                 decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.account_box,
@@ -170,6 +188,7 @@ class _SignUpState extends State<SignUp> {
           Container(
             width: 250.0,
             child: TextField(
+              onChanged: (value) => password = value.trim(),
                 decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.lock,
