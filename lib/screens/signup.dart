@@ -9,28 +9,196 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String chooseType = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-      body: ListView (padding: EdgeInsets.all(30.0),
-        children: <Widget> [
+      body: ListView(
+        padding: EdgeInsets.all(30.0),
+        children: <Widget>[
           myLogo(),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MyStyle().showTitle('App Food'),
-            ],
-          ),
-          ],
-        ),
+          MyStyle().mySizedBox(),
+          showAppName(),
+          MyStyle().mySizedBox(),
+          nameForm(),
+          MyStyle().mySizedBox(),
+          userForm(),
+          MyStyle().mySizedBox(),
+          passwordForm(),
+          MyStyle().mySizedBox(),
+          userRadio(),
+          shopRadio(),
+          riderRadio(),
+          MyStyle().mySizedBox(),
+          registerButton(),
+        ],
+      ),
     );
   }
 
-  Widget myLogo() => Row(mainAxisAlignment: MainAxisAlignment.center ,
-    children: <Widget>[
-      MyStyle().showLogo(),
-    ],
+  Widget registerButton() => Container(width: 250.0,
+    child: ElevatedButton(
+      onPressed: () {}, 
+      child: Text('Register',),
+    ),
   );
+
+
+  Row userRadio() => Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            width: 250.0,  
+            child: Row(
+              children: <Widget> [
+                Radio(value: 'User', 
+                  groupValue: chooseType, 
+                  onChanged: (value) {
+                    setState(() {
+                      chooseType = value!;
+                    });
+                  },
+                ),
+                Text('1.ผู้สั่งอาหาร',
+                style: TextStyle(color: MyStyle().darkColor),
+              ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+    Row shopRadio() => Row(
+     mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            width: 250.0,  
+            child: Row(
+              children: <Widget> [
+                Radio(value: 'Shop', 
+                  groupValue: chooseType, 
+                  onChanged: (value) {
+                    setState(() {
+                      chooseType = value!;
+                    });
+                  },
+                ),
+                Text('2.ร้านอาหาร',
+                style: TextStyle(color: MyStyle().darkColor),
+              ),
+              ],
+            ),
+          ),
+        ],
+      );  
+
+    Row riderRadio() => Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            width: 250.0,  
+            child: Row(
+              children: <Widget> [
+                Radio(value: 'Rider', 
+                  groupValue: chooseType, 
+                  onChanged: (value) {
+                    setState(() {
+                      chooseType = value!;
+                    });
+                  },
+                ),
+                Text('3.ผู้ส่งอาหาร',
+                style: TextStyle(color: MyStyle().darkColor),
+              ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+  Widget nameForm() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 250.0,
+            child: TextField(
+                decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.face,
+                color: MyStyle().darkColor,
+              ),
+              labelStyle: TextStyle(color: MyStyle().darkColor),
+              labelText: 'Name :',
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+            )),
+          ),
+        ],
+      );
+
+  Widget userForm() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 250.0,
+            child: TextField(
+                decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.account_box,
+                color: MyStyle().darkColor,
+              ),
+              labelStyle: TextStyle(color: MyStyle().darkColor),
+              labelText: 'User :',
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+            )),
+          ),
+        ],
+      );
+
+  Widget passwordForm() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 250.0,
+            child: TextField(
+                decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.lock,
+                color: MyStyle().darkColor,
+              ),
+              labelStyle: TextStyle(color: MyStyle().darkColor),
+              labelText: 'Pasword :',
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: MyStyle().darkColor)),
+            )),
+          ),
+        ],
+      );
+
+  Row showAppName() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        MyStyle().showTitle('App Food'),
+      ],
+    );
+  }
+
+  Widget myLogo() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          MyStyle().showLogo(),
+        ],
+      );
 }
