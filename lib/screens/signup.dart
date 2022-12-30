@@ -1,5 +1,6 @@
 import 'package:appfood/utility/my_style.dart';
 import 'package:appfood/utility/normal_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -49,20 +50,44 @@ class _SignUpState extends State<SignUp> {
     child: ElevatedButton(
       onPressed: () {
         print('Name = $name,User = $user,Password = $password , chooseType = $chooseType ');
+        registerThread();
+       
         if (name.isEmpty ||
          user.isEmpty || 
          password.isEmpty) 
          {
           print('error');
           normalDialog(context, 'ข้อมูลไม่ครบถ้วน');
+        }else {
+          registerThread();
         }
-
       }, 
-
       child: const Text('Register',),
     ),
   );
 
+  Future<Null> registerThread()async{
+    
+    String url = 'https://www.57ans.com/appfood/insertuser.php?isAdd=true&name=$name&type=$chooseType&user=$user&password=$password';
+      Response response = await Dio().get(url);
+      print(url);
+      print('res = $response');
+      
+
+     
+     
+      try {
+      Response response = await Dio().get(url);
+      print(url);
+      print('res = $response');
+      
+    } catch (e) {
+      
+    }
+  
+
+
+  }
 
   Row userRadio() => Row(
     mainAxisAlignment: MainAxisAlignment.end,
