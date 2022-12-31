@@ -70,14 +70,20 @@ class _SignUpState extends State<SignUp> {
   Future<Null> registerThread()async{
     
     String url = 'https://www.57ans.com/appfood/insertuser.php?isAdd=true&name=$name&type=$chooseType&user=$user&password=$password';
-      Response response = await Dio().get(url);
-      print(url);
-      print('res 1= $response');
       
-      try {
+    
+      try { 
+     
       Response response = await Dio().get(url);
-      print(url);
       print('res = $response');
+      Navigator.pop(context);
+
+
+      //if (response.toString() == 'true') {
+      //  Navigator.pop(context);
+      //}else {
+      //  normalDialog(context, 'not registor');
+      //}
       
     } catch (e) {
       
