@@ -59,6 +59,7 @@ class _SignUpState extends State<SignUp> {
           print('error');
           normalDialog(context, 'ข้อมูลไม่ครบถ้วน');
         }else {
+          normalDialog(context, 'register');
           registerThread();
         }
       }, 
@@ -71,11 +72,8 @@ class _SignUpState extends State<SignUp> {
     String url = 'https://www.57ans.com/appfood/insertuser.php?isAdd=true&name=$name&type=$chooseType&user=$user&password=$password';
       Response response = await Dio().get(url);
       print(url);
-      print('res = $response');
+      print('res 1= $response');
       
-
-     
-     
       try {
       Response response = await Dio().get(url);
       print(url);
