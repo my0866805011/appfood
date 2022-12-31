@@ -50,16 +50,17 @@ class _SignUpState extends State<SignUp> {
     child: ElevatedButton(
       onPressed: () {
         print('Name = $name,User = $user,Password = $password , chooseType = $chooseType ');
-        registerThread();
+        
        
         if (name.isEmpty ||
          user.isEmpty || 
-         password.isEmpty) 
+         password.isEmpty ||
+         chooseType.isEmpty) 
          {
           print('error');
           normalDialog(context, 'ข้อมูลไม่ครบถ้วน');
         }else {
-          normalDialog(context, 'register');
+         // normalDialog(context, 'register');
           registerThread();
         }
       }, 
@@ -71,24 +72,20 @@ class _SignUpState extends State<SignUp> {
     
     String url = 'https://www.57ans.com/appfood/insertuser.php?isAdd=true&name=$name&type=$chooseType&user=$user&password=$password';
       
-    
-      try { 
-     
-      Response response = await Dio().get(url);
-      print('res = $response');
-      Navigator.pop(context);
+    try {
+       Response response = await Dio().get(url);
+       print('res = $response');
 
-
-      //if (response.toString() == 'true') {
-      //  Navigator.pop(context);
-      //}else {
-      //  normalDialog(context, 'not registor');
-      //}
+      if (response.toString().trim() == 'true') {
+        Navigator.pop(context);
+        
+      } else {
+        normalDialog(context, 'Error ลองใหม่');
+      }
       
     } catch (e) {
       
     }
-  
 
 
   }

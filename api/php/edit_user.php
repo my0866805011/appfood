@@ -30,12 +30,11 @@ $sql = "SELECT * FROM usertbl WHERE id='$m_id' ";
                     <input type="text" name="mname" class="form-control" value="<?=$row['name']?>" > <br>
                     <label>User </label>
                     <input type="text" name="muser" class="form-control" value=<?=$row['user']?> > <br>  
-                    <label>E-maile </label>
-                    <input type="text" name="memail" class="form-control" value=<?$row['email']?> > <br>
+                  
                     <label>Password </label>
                     <input type="text" name="mpassword" class="form-control"  value=<?$row['password']?> > <br>                    
-                    <label>phone </label>
-                    <input type="number" name="mphone" class="form-control" value=<?$row['phone']?> > <br>
+                    <label>type hone </label>
+                    <input type="text" name="mtype" class="form-control" value=<?$row['type']?> > <br>
                     
                     <input type="submit" value="Update" class="btn btn-success" > 
                     <a href="./myshowuser.php" class="btn btn-danger"> Cancel</a>

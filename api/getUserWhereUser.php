@@ -20,7 +20,7 @@ if (isset($_GET)) {
 				
 		$user = $_GET['user'];
 
-		$result = mysqli_query($conn, "SELECT * FROM usertbl WHERE user = '$user'");
+		$result = mysqli_query($conn, "SELECT * FROM usertable WHERE user = '$user'");
 
 		if ($result) {
 
