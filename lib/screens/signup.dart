@@ -61,12 +61,30 @@ class _SignUpState extends State<SignUp> {
           normalDialog(context, 'ข้อมูลไม่ครบถ้วน');
         }else {
          // normalDialog(context, 'register');
-          registerThread();
+          checkUser();
         }
       }, 
       child: const Text('Register',),
     ),
   );
+
+  Future<Null> checkUser()async{
+  String url='https://www.57ans.com/appfood/getUserWhereUser.php?isAdd=true&user=$user';
+  try {
+    Response response = await Dio().get(url);
+    print('res =$response');
+    if (response.toString().trim() == 'null') {
+      registerThread();
+    } else {
+      normalDialog(context, '$user ซ้ำ');
+
+    }
+    // ignore: empty_catches
+    } catch (e) {}
+  
+  }
+
+
 
   Future<Null> registerThread()async{
     
