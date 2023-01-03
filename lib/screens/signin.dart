@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:appfood/model/user_model.dart';
+import 'package:appfood/screens/Mian_shop.dart';
+import 'package:appfood/screens/main_rider.dart';
+import 'package:appfood/screens/main_user.dart';
 import 'package:appfood/utility/my_style.dart';
 import 'package:appfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
@@ -80,7 +83,16 @@ class _SignInState extends State<SignIn> {
        for (var map in result) {
           UserModel userModel = UserModel.fromJson(map);
           if (password == userModel.password){
-
+            String? chooseType = userModel.type;
+            if (chooseType == 'User') {
+               routeTuService(MianUser());
+             } else if (chooseType == 'Shop') {
+                 routeTuService(MainShop());
+             } else if (chooseType == 'Rider') {
+                 routeTuService(MainRider());     
+             } else {
+               normalDialog(context,'Error');
+             }
           }else {
             normalDialog(context,'Password ไม่ถูกต้อง');
           }
@@ -93,6 +105,13 @@ class _SignInState extends State<SignIn> {
     }
   
   
+  }
+
+  void routeTuService(Widget myWidget) {
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => myWidget,);
+    Navigator.pushAndRemoveUntil(
+      context, route, (route) => false);
   }
  
 Widget userForm() => Container(
