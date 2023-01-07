@@ -7,6 +7,7 @@ import 'package:appfood/utility/my_style.dart';
 import 'package:appfood/utility/normal_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -16,11 +17,14 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  String id ='';
+  String muser ='';
+  String mpassword = '';
+  
+  String mname ='';
+  
 
-  String user ='';
-  String password = '';
-
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +63,7 @@ class _SignInState extends State<SignIn> {
   Widget loginButton() => Container(width: 250.0,
     child: ElevatedButton(
       onPressed: () {
-        if (user.isEmpty || password.isEmpty) {
+        if (muser.isEmpty || mpassword.isEmpty) {
           normalDialog(context, 'ข้อมูลไม่ถูกต้อง');
         }else {
           checkAuthen();
@@ -73,7 +77,7 @@ class _SignInState extends State<SignIn> {
   );
 
   Future<Null> checkAuthen()async{
-    String url ='https://www.57ans.com/appfood/getUserWhereUser.php?isAdd=true&user=$user';
+    String url ='https://www.57ans.com/appfood/getUserWhereUser.php?isAdd=true&user=$muser';
     try {
       Response response = await Dio().get(url);
        print('res = $response');
@@ -82,41 +86,53 @@ class _SignInState extends State<SignIn> {
        print('result = $result ');
        for (var map in result) {
           UserModel userModel = UserModel.fromJson(map);
-          if (password == userModel.password){
+          if (mpassword == userModel.password){
             String? chooseType = userModel.type;
+            // ignore: unused_local_variable
+            String? id = userModel.id;
             if (chooseType == 'User') {
-               routeTuService(MianUser());
+               routeTuService(MianUser(),userModel);          
              } else if (chooseType == 'Shop') {
-                 routeTuService(MainShop());
+                 routeTuService(MainShop(),userModel);
              } else if (chooseType == 'Rider') {
-                 routeTuService(MainRider());     
+                 routeTuService(MainRider(),userModel);     
              } else {
                normalDialog(context,'Error');
              }
           }else {
+            // ignore: use_build_context_synchronously
             normalDialog(context,'Password ไม่ถูกต้อง');
           }
          
    
        }
        
+    // ignore: empty_catches
     } catch (e) {
       
     }
   
   
-  }
-
-  void routeTuService(Widget myWidget) {
+  } 
+  Future<Null>  routeTuService(Widget myWidget, UserModel userModel) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("id" ,userModel.id.toString());
+    preferences.setString('type', userModel.type.toString());
+    preferences.setString('name', userModel.name.toString());
+    
+     mname = preferences.getString('name')!;
+      print('name 124:$mname');
+    
     MaterialPageRoute route = MaterialPageRoute(
       builder: (context) => myWidget,);
+    // ignore: use_build_context_synchronously
     Navigator.pushAndRemoveUntil(
       context, route, (route) => false);
   }
  
 Widget userForm() => Container(
     width: 250.0,
-    child: TextField(onChanged: (value) => user =value.trim(),
+    child: TextField(onChanged: (value) => muser =value.trim(),
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.account_box,color: MyStyle().darkColor,),
         labelStyle: TextStyle(color: MyStyle().darkColor),
@@ -134,7 +150,7 @@ Widget userForm() => Container(
   
 Widget passwordForm() => Container(
     width: 250.0,
-    child: TextField(onChanged: (value)=>password = value.trim(),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    child: TextField(onChanged: (value)=>mpassword = value.trim(),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
       obscureText: true,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.lock,color: MyStyle().darkColor,),
