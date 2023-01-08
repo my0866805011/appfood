@@ -20,6 +20,7 @@ class _SignInState extends State<SignIn> {
   String id ='';
   String muser ='';
   String mpassword = '';
+  String mtype = '';
   
   String mname ='';
   
@@ -119,9 +120,10 @@ class _SignInState extends State<SignIn> {
     preferences.setString("id" ,userModel.id.toString());
     preferences.setString('type', userModel.type.toString());
     preferences.setString('name', userModel.name.toString());
-    
+     mtype = preferences.getString('type')!;
      mname = preferences.getString('name')!;
       print('name 124:$mname');
+      print('126 type : $mtype');
     
     MaterialPageRoute route = MaterialPageRoute(
       builder: (context) => myWidget,);

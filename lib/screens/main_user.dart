@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utility/signout_process.dart';
+
 class MianUser extends StatefulWidget {
   const MianUser({super.key});
 
@@ -10,7 +12,7 @@ class MianUser extends StatefulWidget {
 
 class _MianUserState extends State<MianUser> {
 
-  String name ='';
+  String nameUser ='';
 
   @override
   void initState() {
@@ -24,16 +26,24 @@ class _MianUserState extends State<MianUser> {
   Future<Null> findUser()async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      name = preferences.getString('name')!;
-      print('name 27 :$name');
+      nameUser = preferences.getString('name')!;
     });
   }
+
+    
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // ignore: unnecessary_string_interpolations
-      appBar: AppBar(title: Text('$name'),),
+      appBar: AppBar(
+        // ignore: unnecessary_string_interpolations
+        title: Text('สวัสดี $nameUser'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.exit_to_app),
+          onPressed: () =>signOutProcess() )
+        ],
+        ),
     );
   }
 }

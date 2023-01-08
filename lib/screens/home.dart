@@ -1,6 +1,11 @@
+import 'package:appfood/screens/Mian_shop.dart';
+import 'package:appfood/screens/main_rider.dart';
 import 'package:appfood/screens/signin.dart';
 import 'package:appfood/screens/signup.dart';
+import 'package:appfood/screens/main_user.dart';
+import 'package:appfood/utility/normal_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key, required String title});
@@ -10,7 +15,58 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
+
+  String chooseType = '';
+  String preferences = '';
+  String nameUser = '';
+  
+  
+  @override 
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkPreferance();
+
+  }
+
+Future<Null> checkPreferance()async{
+   try{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    nameUser = preferences.getString('name')!;
+    chooseType = preferences.getString('type')!;
+
+    //setState(() {
+    //  nameUser = preferences.getString('name')!;
+    //  chooseType = preferences.getString('type')!;
+    //  
+    //});
+    if (chooseType !=null) {
+        if (chooseType == 'User') {
+          routeToService(MianUser());  
+        } else if (chooseType == 'Shop'){
+          routeToService(MainShop());
+        } else if (chooseType == 'Rider') {
+          routeToService(MainRider());
+        } else {
+          routeToService(MainRider());
+          normalDialog(context, 'Error :$chooseType');  
+        }
+    }
+    print('54 ChooseType : $chooseType');
+    print('55 nameUser : $nameUser');
+
+
+  }catch (e) {
+  }
+}
+
+void routeToService(Widget myWidget) {
+  MaterialPageRoute route = MaterialPageRoute(
+    builder: (context) => myWidget,);
+  Navigator.pushAndRemoveUntil(
+    context, route, (route) => false);  
+}
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
@@ -58,7 +114,7 @@ class _HomeState extends State<Home> {
 
 
   UserAccountsDrawerHeader showHeadDrawer() {
-    return UserAccountsDrawerHeader(
+    return const UserAccountsDrawerHeader(
         accountName: Text('Gust'),
        accountEmail: Text('Please Login'));
   }
