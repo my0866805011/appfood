@@ -3,6 +3,7 @@ import 'package:appfood/screens/main_rider.dart';
 import 'package:appfood/screens/signin.dart';
 import 'package:appfood/screens/signup.dart';
 import 'package:appfood/screens/main_user.dart';
+import 'package:appfood/utility/my_style.dart';
 import 'package:appfood/utility/normal_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,8 +115,10 @@ void routeToService(Widget myWidget) {
 
 
   UserAccountsDrawerHeader showHeadDrawer() {
-    return const UserAccountsDrawerHeader(
-        accountName: Text('Gust'),
-       accountEmail: Text('Please Login'));
+    return UserAccountsDrawerHeader(
+      decoration: MyStyle().myBoxDecoration('guest.jpg'),
+      currentAccountPicture: MyStyle().showLogo(),
+      accountName: Text('Gust'),
+      accountEmail: Text('Please Login'));
   }
 }

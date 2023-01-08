@@ -30,7 +30,6 @@ class _MianUserState extends State<MianUser> {
     });
   }
 
-    
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +40,19 @@ class _MianUserState extends State<MianUser> {
         title: Text('สวัสดี $nameUser'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.exit_to_app),
-          onPressed: () =>signOutProcess() )
+          onPressed: () =>signOutProcess(context))                
         ],
-        ),
+      ),
+      drawer:showDrawer() ,
     );
   }
 }
-
+ Drawer showDrawer() => Drawer(
+  child: ListView(
+    children: <Widget>[
+      showHead(),
+    ],
+  ),
+ );
 
 

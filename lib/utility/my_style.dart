@@ -21,10 +21,18 @@ class MyStyle {
 
   Container showLogo() {
     return Container(
-            width: 120.0,
-            child: Image.asset('assets/images/logo.png'),
-          );
+     width: 120.0,
+     child: Image.asset('assets/images/logo.png'),
+    );
   } 
+
+  BoxDecoration myBoxDecoration(String namePic){
+    return BoxDecoration(
+      image: DecorationImage(
+          image: AssetImage('assets/images/$namePic'),fit:BoxFit.cover,
+         ),
+       );
+}
 
   MyStyle();
 }

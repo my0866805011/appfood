@@ -18,7 +18,7 @@ class _MainShopState extends State<MainShop> {
         title: Text('Main Shop'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.exit_to_app),
-          onPressed: () =>signOutProcess() )
+          onPressed: () =>signOutProcess(context) )
         ],
         ),
     );

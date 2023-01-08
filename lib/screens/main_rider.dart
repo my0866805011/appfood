@@ -16,7 +16,7 @@ class _MainRiderState extends State<MainRider> {
         title: Text('Main Rider'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.exit_to_app),
-            onPressed: () => signOutProcess(),
+            onPressed: () => signOutProcess(context),
           )
 
         ],
