@@ -1,3 +1,4 @@
+import 'package:appfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,13 +47,22 @@ class _MianUserState extends State<MianUser> {
       drawer:showDrawer() ,
     );
   }
-}
+
  Drawer showDrawer() => Drawer(
   child: ListView(
     children: <Widget>[
-    
+      showHead(),   
     ],
   ),
  );
 
-
+UserAccountsDrawerHeader showHead(){
+  return UserAccountsDrawerHeader(
+    decoration: MyStyle().myBoxDecoration('user1.jpg'),
+    currentAccountPicture: MyStyle().showLogo(),
+    accountName: Text('User Login'), 
+    accountEmail: Text('Login'),
+    );
+    
+  }
+}

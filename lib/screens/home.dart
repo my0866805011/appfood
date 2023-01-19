@@ -82,6 +82,7 @@ void routeToService(Widget myWidget) {
         showHeadDrawer(),
         signInMenu(),
         signOutMenu(),
+        exitMenu(),
 
       ],
     )
@@ -104,6 +105,18 @@ void routeToService(Widget myWidget) {
     return ListTile(
         leading: Icon(Icons.android),
         title: Text('Sign Out'),
+          onTap: () {
+          Navigator.pop(context);
+          MaterialPageRoute route = MaterialPageRoute(
+            builder: (Value)=>SignUp());
+            Navigator.push(context, route);
+        } ,
+      );
+  }
+ListTile exitMenu() {
+    return ListTile(
+        leading: Icon(Icons.exit_to_app),
+        title: Text('ออกจากระบบ'),
           onTap: () {
           Navigator.pop(context);
           MaterialPageRoute route = MaterialPageRoute(
