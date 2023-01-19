@@ -78,7 +78,7 @@ class _SignInState extends State<SignIn> {
   );
 
   Future<Null> checkAuthen()async{
-    String url ='https://www.57ans.com/appfood/getUserWhereUser.php?isAdd=true&user=$muser';
+   String url='https://www.57ans.com/appfood/getUserWhereUser.php?isAdd=true&user=$muser';
     try {
       Response response = await Dio().get(url);
        print('res = $response');

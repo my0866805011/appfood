@@ -39,7 +39,7 @@ class _MianUserState extends State<MianUser> {
         // ignore: unnecessary_string_interpolations
         title: Text('สวัสดี $nameUser'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.exit_to_app),
+          IconButton(icon: const Icon(Icons.exit_to_app),
           onPressed: () =>signOutProcess(context))                
         ],
       ),
@@ -50,7 +50,7 @@ class _MianUserState extends State<MianUser> {
  Drawer showDrawer() => Drawer(
   child: ListView(
     children: <Widget>[
-      showHead(),
+    
     ],
   ),
  );
