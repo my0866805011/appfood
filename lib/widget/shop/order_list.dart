@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class order extends StatefulWidget {
-  const order({super.key});
+
+ class OrderListShop extends StatefulWidget {
+  const OrderListShop({super.key});
 
   @override
-  State<order> createState() => _orderState();
+  State<OrderListShop> createState() => _OrderListShopState();
 }
 
-class _orderState extends State<order> {
+class _OrderListShopState extends State<OrderListShop> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Text('รายการสั่งซื้อ');
   }
 }

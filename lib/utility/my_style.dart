@@ -33,6 +33,16 @@ class MyStyle {
          ),
        );
 }
+Widget titleCenter(BuildContext context, String cstring ){
+  return Center(
+    child: Container(width: MediaQuery.of(context).size.width*0.5,
+      child: Text(cstring,
+       style: TextStyle(fontSize: 24.0,
+       fontWeight: FontWeight.bold,),
+   ),
+    ),
+  ); 
+}
 
   MyStyle();
 }
