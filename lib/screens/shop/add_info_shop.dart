@@ -5,11 +5,23 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class AddinfoShop extends StatefulWidget {
   const AddinfoShop({super.key});
 
+  
+  
   @override
   State<AddinfoShop> createState() => _AddinfoShopState();
 }
 
 class _AddinfoShopState extends State<AddinfoShop> {
+
+  double mlat,mlng;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
