@@ -1,6 +1,11 @@
+// ignore_for_file: empty_catches
+
+import 'dart:async';
+
 import 'package:appfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class AddinfoShop extends StatefulWidget {
   const AddinfoShop({super.key});
@@ -13,14 +18,32 @@ class AddinfoShop extends StatefulWidget {
 
 class _AddinfoShopState extends State<AddinfoShop> {
 
-  double mlat,mlng;
+   double mlat=0;
+   double mlng=0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    findLatLng();
   }
 
+Future<Null> findLatLng()async{
+  LocationData? locationData = await findLocationData();
+ // mlat = locationData.latitude;
+ // mlng = locationData.longitude;
+  print('lat = $mlat, lng = $mlng');
+
+}
+
+Future<LocationData?> findLocationData()async{
+  Location location = Location();
+  try {
+    return location.getLocation();
+  } catch (e) {
+    return null;
+  }
+}
 
   @override
   Widget build(BuildContext context) {
