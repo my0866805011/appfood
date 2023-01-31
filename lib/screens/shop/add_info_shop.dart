@@ -1,5 +1,6 @@
 import 'package:appfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddinfoShop extends StatefulWidget {
   const AddinfoShop({super.key});
@@ -26,10 +27,41 @@ class _AddinfoShopState extends State<AddinfoShop> {
             phoneForm(),
             MyStyle().mySizedBox(),
             newImage(),
+            MyStyle().mySizedBox(),
+            showMap(),
+            // AIzaSyCq2Bls6-ggkYorNRHfGv_7I08D9riww_I (API key)
+            MyStyle().mySizedBox(),
+
+ElevatedButton(
+  
+  onPressed: () { },
+  child: Text('Looks like a RaisedButton'),
+)
+
+            
+            
           ],
         ),
       ),
     );
+  }
+
+  Container showMap() {
+    
+    LatLng mlatLng = LatLng(13.789582356948634, 100.56374053851904);
+    CameraPosition mcameraPosition = CameraPosition(
+      target: mlatLng,
+      zoom: 16.0);
+    return Container(
+      height: 300.0,
+      child: GoogleMap(
+        initialCameraPosition: mcameraPosition,
+        mapType: MapType.normal,
+        onMapCreated: (controller) {
+          
+        },
+        ),
+      );
   }
 
   Row newImage() {
@@ -49,7 +81,7 @@ class _AddinfoShopState extends State<AddinfoShop> {
         IconButton(
             onPressed: () {},
             icon: Icon(
-              Icons.add_a_photo,
+              Icons.add_photo_alternate,
               size: 36.0,
             ))
       ],

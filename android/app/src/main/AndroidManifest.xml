@@ -6,6 +6,9 @@
         android:label="appfood"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCq2Bls6-ggkYorNRHfGv_7I08D9riww_I"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
