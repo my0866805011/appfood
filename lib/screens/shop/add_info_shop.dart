@@ -1,10 +1,12 @@
 // ignore_for_file: empty_catches
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:appfood/utility/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 
 class AddinfoShop extends StatefulWidget {
@@ -16,6 +18,8 @@ class AddinfoShop extends StatefulWidget {
 
 class _AddinfoShopState extends State<AddinfoShop> {
   late double mlat=0 , mlng = 0;
+  late File file;
+
 
   @override
   void initState() {
@@ -115,17 +119,18 @@ class _AddinfoShopState extends State<AddinfoShop> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-            onPressed: () {},
+            onPressed: () => chooseImage(ImageSource.camera),
             icon: Icon(
               Icons.add_a_photo,
               size: 36.0,
             )),
         Container(
           width: 250.0,
-          child: Image.asset('assets/images/shop.png'),
+
+          child: file == null ? Image.asset('assets/images/shop.png')
         ),
         IconButton(
-            onPressed: () {},
+            onPressed: () => chooseImage(ImageSource.gallery),
             icon: Icon(
               Icons.add_photo_alternate,
               size: 36.0,
@@ -133,6 +138,23 @@ class _AddinfoShopState extends State<AddinfoShop> {
       ],
     );
   }
+
+Future<Null> chooseImage(ImageSource imageSource)async{
+try {
+  var object = await ImagePicker.pickImage(
+    source: imageSource,
+    maxHeight: 800.0,
+    maxWidth: 800.0,
+    );
+    setState(() {
+      file = object as File;
+    });
+  
+} catch (e) {
+  
+}
+}
+
 
   Widget nameForm() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
