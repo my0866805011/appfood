@@ -10,16 +10,12 @@ import 'package:location/location.dart';
 class AddinfoShop extends StatefulWidget {
   const AddinfoShop({super.key});
 
-  
-  
   @override
   State<AddinfoShop> createState() => _AddinfoShopState();
 }
 
 class _AddinfoShopState extends State<AddinfoShop> {
-
-   double mlat=0;
-   double mlng=0;
+  late double mlat=0 , mlng = 0;
 
   @override
   void initState() {
@@ -28,22 +24,25 @@ class _AddinfoShopState extends State<AddinfoShop> {
     findLatLng();
   }
 
-Future<Null> findLatLng()async{
-  LocationData? locationData = await findLocationData();
- // mlat = locationData.latitude;
- // mlng = locationData.longitude;
-  print('lat = $mlat, lng = $mlng');
-
-}
-
-Future<LocationData?> findLocationData()async{
-  Location location = Location();
-  try {
-    return location.getLocation();
-  } catch (e) {
-    return null;
+  Future<Null> findLatLng() async {
+    LocationData? locationData = await findLocationData();
+    setState(() {
+     // lat = locationData.latitude;
+     // lng = locationData.longitude;
+    });
+    // mlat = locationData.latitude;
+    // mlng = locationData.longitude;
+    print('35 lat = $mlat, lng = $mlng');
   }
-}
+
+  Future<LocationData?> findLocationData() async {
+    Location location = Location();
+    try {
+      return location.getLocation();
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,40 +62,52 @@ Future<LocationData?> findLocationData()async{
             MyStyle().mySizedBox(),
             newImage(),
             MyStyle().mySizedBox(),
+            mlat == null ? MyStyle().showProgress(): 
             showMap(),
             // AIzaSyCq2Bls6-ggkYorNRHfGv_7I08D9riww_I (API key)
             MyStyle().mySizedBox(),
-
-ElevatedButton(
-  
-  onPressed: () { },
-  child: Text('Looks like a RaisedButton'),
-)
-
-            
-            
+            saveInformation()
           ],
         ),
       ),
     );
   }
 
+  Widget saveInformation() {
+    return Container( width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text('Save information'),
+      ),
+    );
+  }
+
+  Set<Marker> myMarker() {
+    return <Marker> [
+      Marker(
+        markerId: MarkerId('myShop'),
+        position: LatLng(mlat, mlng), 
+        infoWindow: InfoWindow(
+          title: 'ที่อยู่ ร้าน' ,
+          snippet: 'mLat = $mlat, mLng = $mlng',
+         ), 
+      )
+    ].toSet();
+  }
+
   Container showMap() {
-    
     LatLng mlatLng = LatLng(13.789582356948634, 100.56374053851904);
-    CameraPosition mcameraPosition = CameraPosition(
-      target: mlatLng,
-      zoom: 16.0);
+    CameraPosition mcameraPosition =
+        CameraPosition(target: mlatLng, zoom: 16.0);
     return Container(
       height: 300.0,
       child: GoogleMap(
         initialCameraPosition: mcameraPosition,
         mapType: MapType.normal,
-        onMapCreated: (controller) {
-          
-        },
-        ),
-      );
+        onMapCreated: (controller) {},
+        markers: myMarker(),
+      ),
+    );
   }
 
   Row newImage() {
